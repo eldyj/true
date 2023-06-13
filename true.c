@@ -15,9 +15,9 @@ typedef struct {
 } atom_t;
 
 static atom_t stk[TSTACK_S] = {0};
-int stki = 0;
-int stri = -1;
-int esc = 0;
+size_t stki = 0;
+long stri = -1;
+short esc = 0;
 char tmp[TSTR_S] = {0};
 char tmp2[TSTR_S];
 
@@ -233,7 +233,7 @@ eval(const char c)
     }
 
     case 'i': {
-      printf("%u\n", stki);
+      printf("%lu\n", stki);
       break;
     }
 
@@ -263,6 +263,42 @@ eval(const char c)
 
     case 'f': {
       return eval_f(stk[--stki].s);
+      break;
+    }
+
+    case 'p': {
+      eval('1');
+      eval('+');
+      break;
+    }
+
+    case 'm': {
+      eval('1');
+      eval('-');
+      break;
+    }
+
+    case 'o': {
+      eval('1');
+      eval('=');
+      break;
+    }
+
+    case 'z': {
+      eval('0');
+      eval('=');
+      break;
+    }
+
+    case 'd': {
+      eval('?');
+      eval('$');
+      break;
+    }
+
+    case 'l': {
+      eval('?');
+      eval('e');
       break;
     }
 
